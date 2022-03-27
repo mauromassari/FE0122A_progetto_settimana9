@@ -10,9 +10,9 @@ export class TodosService {
 
   private impegno!: string
 
-  private impegnoObj!: object
+  //private impegnoObj!: object
 
-  private avvisoTodos!: string
+  //private avvisoTodos!: string
 
 
   aggiungiImpegno(elemento:string){

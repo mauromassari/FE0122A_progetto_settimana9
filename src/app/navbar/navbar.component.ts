@@ -16,6 +16,12 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  deleteLocal(){
+    localStorage.clear()
+    window.location.reload();
+
+  }
+
 }
 
 

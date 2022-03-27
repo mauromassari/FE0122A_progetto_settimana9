@@ -13,22 +13,35 @@ export class CompletatiComponent implements OnInit {
 
   task!: any
 
-  messaggio: any = "Recupero task da fare..."
+  messaggio: any = "Recupero task..."
+
+  taskForMessage!:any
 
 
-  constructor(private tasksService: TodosService) {
-  }
+  constructor(private tasksService: TodosService) {}
 
   ngOnInit(): any{
-    this.tasks = this.tasksService.getImpegni()
+    this.provaPromise1()
 
-   if(!this.tasks.length){this.provaPromise()}
+    if(!this.tasks.length){
+      this.messaggio = "Recupero task..."
+      this.provaPromise()}
+
 
   }
 
   provaPromise():any{
     let p =new Promise((succ,err) =>
     {setTimeout(()=>{succ(this.messaggio = "Non ci sono task completati")},2000)},
+    )
+    return p
+  }
+
+  provaPromise1(){
+
+    let p = new Promise((succ,err) =>
+    {setTimeout(()=>{succ(this.tasks = this.tasksService.getImpegni())},2000)},
+
     )
     return p
   }

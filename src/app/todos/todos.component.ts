@@ -19,60 +19,52 @@ export class TodosComponent implements OnInit {
 
   messaggio:string = "Recupero task da fare..."
 
-
-
-  constructor(private tasksService: TodosService) {
-
-
-  }
-
+  constructor(private tasksService: TodosService) {}
 
   ngOnInit(): void {
-    this.tasks = this.tasksService.getImpegni()
+    this.provaPromise1()
 
     if(!this.tasks.length){this.provaPromise()}
-
-
   }
 
   addTask(){
-
     if(this.task == "Scrivi un impegno!" || this.task == ""){
       this.task = "Scrivi un impegno!"
     }else{
-
-    this.tasksService.aggiungiImpegno(this.task)
-    this.task = ""
-
+      this.tasksService.aggiungiImpegno(this.task)
+      this.task = ""
     }
   }
-
-
 
   completato(el:Todo){
 
     let p = new Promise((succ) =>
     {setTimeout(()=>{succ(
 
-    this.tasksService.fleggaTask(el)
+      this.tasksService.fleggaTask(el)
 
-    )},2000)},)
+      )},2000)},)
 
-    return p
+      return p
+    }
 
-  }
+    //da fare nel service
+    provaPromise(){
 
-  //da fare nel service
-  provaPromise(){
+      let p = new Promise((succ,err) =>
+      {setTimeout(()=>{succ(this.messaggio= "Ops, non ci sono task!")},2000)},
 
-    let p = new Promise((succ,err) =>
-    {setTimeout(()=>{succ(this.messaggio= "Ops, non ci sono task!")},2000)},
+      )
+      return p
+    }
 
-    )
+    provaPromise1(){
 
-    return p
-  }
+      let p = new Promise((succ,err) =>
+      {setTimeout(()=>{succ(this.tasks = this.tasksService.getImpegni())},2000)},
 
-
+      )
+      return p
+    }
 
 }
